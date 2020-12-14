@@ -14,9 +14,13 @@ import java.util.ArrayList;
 public class History implements IHistory{
 
     ArrayList<String> history_;
+    IStorage storage_;
     
-    History(){
+    History(IStorage storage){
+        
          history_ = new ArrayList<>();
+         storage_ = storage;
+         loadHistory();
     }
     
     @Override
@@ -35,12 +39,12 @@ public class History implements IHistory{
     }
     
     void loadHistory(){
-        
+        history_ = storage_.importContent();
     }
 
     @Override
     public void save() {
-        
+        storage_.export(history_);
     }
     
     

@@ -6,6 +6,7 @@
 package calculator;
 
 import gui.*;
+import java.io.IOException;
 import javax.swing.*;
 
 /**
@@ -17,8 +18,13 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        JFrame mainFrame = new MainFrame(new Interpreter(), new History());
+    public static void main(String[] args) throws IOException {
+        
+        IInterpreter interpreter = new Interpreter();
+        IStorage storage = new FileStorage("history.txt");
+        IHistory history = new History(storage);
+        
+        JFrame mainFrame = new MainFrame(interpreter, history);
         mainFrame.setVisible(true);
     }
     

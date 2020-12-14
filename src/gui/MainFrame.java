@@ -342,6 +342,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
+        historyList.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                historyListComponentShown(evt);
+            }
+        });
         jScrollPane2.setViewportView(historyList);
 
         constantsList.setModel(new javax.swing.AbstractListModel<String>() {
@@ -492,6 +497,7 @@ public class MainFrame extends javax.swing.JFrame {
         history_.add(expressionField.getText(), interpreter_.parse(expressionField.getText()).eval());
         historyListModel_.addElement(history_.getList().get(history_.getList().size()-1));
         historyList.setModel(historyListModel_);
+        expressionField.setText("");
     }//GEN-LAST:event_buttonEqualActionPerformed
 
     private void buttonExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExpActionPerformed
@@ -508,6 +514,10 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         history_.save();
     }//GEN-LAST:event_formWindowClosing
+
+    private void historyListComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_historyListComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_historyListComponentShown
 
  
 
