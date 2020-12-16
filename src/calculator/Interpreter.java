@@ -27,7 +27,7 @@ public class Interpreter implements IInterpreter {
                 return new Number(Double.parseDouble(expression));
             }
             catch(Exception e){
-                return new Number(Double.NaN);
+                return new Number(Double.NaN); 
             }
 	}
 	else
