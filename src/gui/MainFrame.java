@@ -8,6 +8,7 @@ package gui;
 import calculator.History;
 import calculator.IHistory;
 import calculator.IInterpreter;
+import java.util.Arrays;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListModel;
@@ -77,6 +78,9 @@ public class MainFrame extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -493,10 +497,16 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void buttonEqualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEqualActionPerformed
         // TODO add your handling code here:
-        System.out.println(interpreter_.parse(expressionField.getText()).eval());
-        history_.add(expressionField.getText(), interpreter_.parse(expressionField.getText()).eval());
-        historyListModel_.addElement(history_.getList().get(history_.getList().size()-1));
+        String expression = expressionField.getText();
+        Double expressionResult = interpreter_.parse(expression).eval();
+        
+        history_.add(expression, expressionResult);
+        
+        historyListModel_.clear();
+        historyListModel_.addAll(history_.getList());
+        
         historyList.setModel(historyListModel_);
+        
         expressionField.setText("");
     }//GEN-LAST:event_buttonEqualActionPerformed
 
@@ -518,6 +528,11 @@ public class MainFrame extends javax.swing.JFrame {
     private void historyListComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_historyListComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_historyListComponentShown
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        historyList.setListData(history_.getArray());  
+    }//GEN-LAST:event_formWindowOpened
 
  
 

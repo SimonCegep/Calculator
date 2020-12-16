@@ -14,6 +14,6 @@ import java.util.ArrayList;
 public interface IHistory {
     void add(String exp, double result);
     ArrayList getList();
-    String getLast();
+    String[] getArray();
     void save();
 }    

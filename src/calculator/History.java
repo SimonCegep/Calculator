@@ -6,6 +6,7 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -32,10 +33,9 @@ public class History implements IHistory{
     public ArrayList getList() {
         return history_;
     }
-
-    @Override
-    public String getLast() {
-       return history_.get(history_.size()-1);
+    
+    public String[] getArray(){
+        return Arrays.copyOf(history_.toArray(), history_.toArray().length, String[].class);
     }
     
     void loadHistory(){
