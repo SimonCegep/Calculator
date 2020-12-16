@@ -12,6 +12,7 @@ import java.util.Arrays;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListModel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -71,6 +72,9 @@ public class MainFrame extends javax.swing.JFrame {
         constantsList = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         variablesList1 = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -346,6 +350,14 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(5, 5, 5))
         );
 
+        historyList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                historyListMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                historyListMousePressed(evt);
+            }
+        });
         historyList.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 historyListComponentShown(evt);
@@ -367,6 +379,12 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(variablesList1);
 
+        jLabel1.setText("Historique");
+
+        jLabel2.setText("Variables");
+
+        jLabel3.setText("Constantes");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -386,19 +404,32 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(103, 103, 103)
+                .addComponent(jLabel3)
+                .addGap(58, 58, 58))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(expressionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -534,6 +565,21 @@ public class MainFrame extends javax.swing.JFrame {
         historyList.setListData(history_.getArray());  
     }//GEN-LAST:event_formWindowOpened
 
+    private void historyListMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_historyListMousePressed
+        // TODO add your handling code here:
+        if ( SwingUtilities.isRightMouseButton(evt) )
+        {
+            JList list = (JList)evt.getSource();
+            int row = list.locationToIndex(evt.getPoint());
+            list.setSelectedIndex(row);
+            System.out.println(history_.getList().get(list.getSelectedIndex()));
+        }
+    }//GEN-LAST:event_historyListMousePressed
+
+    private void historyListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_historyListMouseClicked
+        // TODO add your handling code here
+    }//GEN-LAST:event_historyListMouseClicked
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -559,6 +605,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JList<String> constantsList;
     private javax.swing.JTextField expressionField;
     private javax.swing.JList<String> historyList;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
