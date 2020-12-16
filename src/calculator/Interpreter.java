@@ -12,7 +12,7 @@ package calculator;
 public class Interpreter implements IInterpreter {
     
     
-    public IExpression parse(String expression)
+    public IExpression parse(String expression) 
     {
 	if(isFirstLevel(expression))
 	{
@@ -23,7 +23,12 @@ public class Interpreter implements IInterpreter {
         
 	if(operatorIndex < 0)
 	{
-            return new Number(Double.parseDouble(expression));
+            try{
+                return new Number(Double.parseDouble(expression));
+            }
+            catch(Exception e){
+                return new Number(Double.NaN);
+            }
 	}
 	else
 	{
@@ -40,12 +45,24 @@ public class Interpreter implements IInterpreter {
     }
     
     String getLeftSubString(String str, int index){
-        String test = str.split("\\" + str.substring(index, index+1))[0];;
-        return str.split("\\" + str.substring(index, index+1))[0];
+       
+        try{
+            return str.split("\\" + str.substring(index, index+1))[0];
+        }
+        catch(Exception e){
+            return "";
+        }
+
     }
     
     String getRightSubString(String str, int index){
-        return str.substring(index + 1);
+        
+        try{
+            return str.substring(index + 1);
+        }
+        catch(Exception e){
+            return "";
+        }
     }
     
     int nextOperatorIndex(String expr){

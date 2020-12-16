@@ -27,6 +27,7 @@ public class FileStorage implements IStorage{
     
     FileStorage(String fileName) throws IOException{
         fileName_ = fileName;
+        file_ = new File(fileName_);
     }
     
     @Override
@@ -54,27 +55,29 @@ public class FileStorage implements IStorage{
         BufferedReader reader = null;
         ArrayList<String> list = new ArrayList<>();
         
-        try {
-            reader = new BufferedReader(new FileReader(fileName_));
-            
-            String ln = reader.readLine();
-            while(ln != null){
-                list.add(ln);
-                ln = reader.readLine();
-            }
-            
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FileStorage.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FileStorage.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        
+       if(file_.exists()){
+           
             try {
+                reader = new BufferedReader(new FileReader(fileName_));
+                
+                String ln = reader.readLine();
+                while(ln != null){
+                    list.add(ln);
+                    ln = reader.readLine();
+                }
+                
+                
                 reader.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(FileStorage.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(FileStorage.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-           return list;
+       }
+            
+        
+        return list;
     }
     
 }
